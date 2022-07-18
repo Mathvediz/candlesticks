@@ -105,8 +105,8 @@ class _PriceColumnState extends State<PriceColumn> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: widget.lastCandle.isBull
-                          ? widget.style.primaryBull
-                          : widget.style.primaryBear,
+                          ? widget.style.secondaryBull
+                          : widget.style.secondaryBear,
                     ),
                     child: Center(
                       child: Text(
