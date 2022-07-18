@@ -1,4 +1,5 @@
-import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 class CandleSticksStyle {
   final Color borderColor;
@@ -25,6 +26,8 @@ class CandleSticksStyle {
 
   final Color toolBarColor;
 
+  final TextStyle textStyle;
+
   CandleSticksStyle({
     required this.borderColor,
     required this.background,
@@ -38,6 +41,7 @@ class CandleSticksStyle {
     required this.mobileCandleHoverColor,
     required this.loadingColor,
     required this.toolBarColor,
+    required this.textStyle,
   });
 
   factory CandleSticksStyle.dark({
@@ -53,6 +57,7 @@ class CandleSticksStyle {
     Color? mobileCandleHoverColor,
     Color? loadingColor,
     Color? toolBarColor,
+    TextStyle? textStyle,
   }) {
     return CandleSticksStyle(
       borderColor: borderColor ?? Color(0xFF848E9C),
@@ -69,6 +74,7 @@ class CandleSticksStyle {
           mobileCandleHoverColor ?? Color(0xFFF0B90A).withOpacity(0.2),
       loadingColor: loadingColor ?? Color(0xFFF0B90A),
       toolBarColor: toolBarColor ?? Color(0xFF191B20),
+      textStyle: textStyle ?? TextStyle(color: Color(0xFF848E9C)),
     );
   }
 
@@ -85,6 +91,7 @@ class CandleSticksStyle {
     Color? mobileCandleHoverColor,
     Color? loadingColor,
     Color? toolBarColor,
+    TextStyle? textStyle,
   }) {
     return CandleSticksStyle(
       borderColor: borderColor ?? Color(0xFF848E9C),
@@ -101,6 +108,7 @@ class CandleSticksStyle {
           mobileCandleHoverColor ?? Color(0xFFF0B90A).withOpacity(0.2),
       loadingColor: loadingColor ?? Color(0xFFF0B90A),
       toolBarColor: toolBarColor ?? Color(0xFFFAFAFA),
+      textStyle: textStyle ?? TextStyle(color: Color(0xFF848E9C)),
     );
   }
 }

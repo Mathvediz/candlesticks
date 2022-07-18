@@ -72,20 +72,17 @@ class _PriceColumnState extends State<PriceColumn> {
                     child: Center(
                       child: Row(
                         children: [
-                          Container(
-                            width: widget.width - PRICE_BAR_WIDTH,
-                            height: 0.05,
-                            color: widget.style.borderColor,
-                          ),
                           Expanded(
                             child: Text(
                               "${HelperFunctions.priceToString(newHigh - priceScale * i)}",
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: widget.style.primaryTextColor,
-                                fontSize: 11,
-                              ),
+                              style: widget.style.textStyle.copyWith(fontSize: 11),
                             ),
+                          ),
+                          Container(
+                            width: widget.width - PRICE_BAR_WIDTH,
+                            height: 0.05,
+                            color: widget.style.borderColor,
                           ),
                         ],
                       ),
@@ -96,7 +93,7 @@ class _PriceColumnState extends State<PriceColumn> {
             ),
             AnimatedPositioned(
               duration: Duration(milliseconds: 300),
-              right: 0,
+              left: 0,
               top: calculatePriceIndicatorTopPadding(
                 widget.chartHeight,
                 widget.low,
@@ -105,16 +102,16 @@ class _PriceColumnState extends State<PriceColumn> {
               child: Row(
                 children: [
                   Container(
-                    color: widget.lastCandle.isBull
-                        ? widget.style.primaryBull
-                        : widget.style.primaryBear,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: widget.lastCandle.isBull
+                          ? widget.style.primaryBull
+                          : widget.style.primaryBear,
+                    ),
                     child: Center(
                       child: Text(
                         HelperFunctions.priceToString(widget.lastCandle.close),
-                        style: TextStyle(
-                          color: widget.style.secondaryTextColor,
-                          fontSize: 11,
-                        ),
+                        style: widget.style.textStyle.copyWith(color: widget.style.secondaryTextColor, fontSize: 11) 
                       ),
                     ),
                     width: PRICE_BAR_WIDTH,
