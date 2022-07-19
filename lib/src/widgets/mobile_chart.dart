@@ -246,63 +246,63 @@ class _MobileChartState extends State<MobileChart> {
                               ],
                             ),
                           ),
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: Row(
-                          //     children: [
-                          //       Expanded(
-                          //         child: Container(
-                          //           decoration: BoxDecoration(
-                          //             border: Border(
-                          //               right: BorderSide(
-                          //                 color: widget.style.borderColor,
-                          //                 width: 1,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           child: Padding(
-                          //             padding: const EdgeInsets.only(top: 10.0),
-                          //             child: VolumeWidget(
-                          //               candles: widget.candles,
-                          //               barWidth: widget.candleWidth,
-                          //               index: widget.index,
-                          //               high:
-                          //                   HelperFunctions.getRoof(volumeHigh),
-                          //               bearColor: widget.style.secondaryBear,
-                          //               bullColor: widget.style.secondaryBull,
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       SizedBox(
-                          //         child: Column(
-                          //           crossAxisAlignment:
-                          //               CrossAxisAlignment.start,
-                          //           children: [
-                          //             SizedBox(
-                          //               height: DATE_BAR_HEIGHT,
-                          //               child: Center(
-                          //                 child: Row(
-                          //                   children: [
-                          //                     Text(
-                          //                       "-${HelperFunctions.addMetricPrefix(HelperFunctions.getRoof(volumeHigh))}",
-                          //                       style: TextStyle(
-                          //                         color:
-                          //                             widget.style.borderColor,
-                          //                         fontSize: 12,
-                          //                       ),
-                          //                     ),
-                          //                   ],
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //           ],
-                          //         ),
-                          //         width: PRICE_BAR_WIDTH,
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        right: BorderSide(
+                                          color: widget.style.borderColor,
+                                          width: 1,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: VolumeWidget(
+                                        candles: widget.candles,
+                                        barWidth: widget.candleWidth,
+                                        index: widget.index,
+                                        high:
+                                            HelperFunctions.getRoof(volumeHigh),
+                                        bearColor: widget.style.secondaryBear,
+                                        bullColor: widget.style.secondaryBull,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: DATE_BAR_HEIGHT,
+                                        child: Center(
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "-${HelperFunctions.addMetricPrefix(HelperFunctions.getRoof(volumeHigh))}",
+                                                style: TextStyle(
+                                                  color:
+                                                      widget.style.borderColor,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  width: PRICE_BAR_WIDTH,
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(
                             height: DATE_BAR_HEIGHT,
                           ),
