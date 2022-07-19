@@ -152,14 +152,14 @@ class _MobileChartState extends State<MobileChart> {
                   color: widget.style.background,
                   child: Stack(
                     children: [
-                      // TimeRow(
-                      //   style: widget.style,
-                      //   indicatorX: longPressX,
-                      //   candles: widget.candles,
-                      //   candleWidth: widget.candleWidth,
-                      //   indicatorTime: currentCandle?.date,
-                      //   index: widget.index,
-                      // ),
+                      TimeRow(
+                        style: widget.style,
+                        indicatorX: longPressX,
+                        candles: widget.candles,
+                        candleWidth: widget.candleWidth,
+                        indicatorTime: currentCandle?.date,
+                        index: widget.index,
+                      ),
                       Column(
                         children: [
                           Expanded(
