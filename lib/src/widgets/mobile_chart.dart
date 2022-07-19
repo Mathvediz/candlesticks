@@ -40,6 +40,8 @@ class MobileChart extends StatefulWidget {
 
   final Function() onReachEnd;
 
+  final TextStyle textStyle;
+
   MobileChart({
     required this.onScaleUpdate,
     required this.onHorizontalDragUpdate,
@@ -49,6 +51,7 @@ class MobileChart extends StatefulWidget {
     required this.onPanDown,
     required this.onPanEnd,
     required this.onReachEnd,
+    required this.textStyle,
   });
 
   @override
@@ -154,10 +157,10 @@ class _MobileChartState extends State<MobileChart> {
                       Column(
                         children: [
                           Expanded(
-                            flex: 1,
                             child: Stack(
                               children: [
                                 PriceColumn(
+                                  textStyle: widget.textStyle,
                                   low: candlesLowPrice,
                                   high: candlesHighPrice,
                                   priceScale: priceScale,
@@ -180,6 +183,9 @@ class _MobileChartState extends State<MobileChart> {
                                 ),
                                 Row(
                                   children: [
+                                    SizedBox(
+                                      width: PRICE_BAR_WIDTH,
+                                    ),
                                     Expanded(
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -204,17 +210,12 @@ class _MobileChartState extends State<MobileChart> {
                                               index: widget.index,
                                               high: high,
                                               low: low,
-                                              bearColor:
-                                                  Theme.of(context).primaryRed,
-                                              bullColor: Theme.of(context)
-                                                  .primaryGreen,
+                                              bearColor: Color(0xFFFF6262),
+                                              bullColor: Color(0xFF0CD190),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: PRICE_BAR_WIDTH,
                                     ),
                                   ],
                                 ),
@@ -290,68 +291,72 @@ class _MobileChartState extends State<MobileChart> {
                               top: longPressY! - 10,
                               child: Row(
                                 children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: Color(0xFFF6F6F7),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                              HelperFunctions.priceToString(
+                                                  high -
+                                                      (longPressY! - 20) /
+                                                          (maxHeight * 0.75 -
+                                                              40) *
+                                                          (high - low)),
+                                          // longPressY! < maxHeight * 0.75
+                                          //     ? HelperFunctions.priceToString(
+                                          //         high -
+                                          //             (longPressY! - 20) /
+                                          //                 (maxHeight * 0.75 -
+                                          //                     40) *
+                                          //                 (high - low))
+                                          //     : HelperFunctions.addMetricPrefix(
+                                          //         HelperFunctions.getRoof(
+                                          //                 volumeHigh) *
+                                          //             (1 -
+                                          //                 (longPressY! -
+                                          //                         maxHeight *
+                                          //                             0.75 -
+                                          //                         10) /
+                                          //                     (maxHeight *
+                                          //                             0.25 -
+                                          //                         10))),
+                                          style: widget.textStyle
+                                              .copyWith(fontSize: 12)),
+                                    ),
+                                    width: PRICE_BAR_WIDTH,
+                                    height: 20,
+                                  ),
                                   DashLine(
                                     length: maxWidth,
                                     color: Theme.of(context).grayColor,
                                     direction: Axis.horizontal,
                                     thickness: 0.5,
                                   ),
-                                  Container(
-                                    color: Theme.of(context)
-                                        .hoverIndicatorBackgroundColor,
-                                    child: Center(
-                                      child: Text(
-                                        longPressY! < maxHeight * 0.75
-                                            ? HelperFunctions.priceToString(
-                                                high -
-                                                    (longPressY! - 20) /
-                                                        (maxHeight * 0.75 -
-                                                            40) *
-                                                        (high - low))
-                                            : HelperFunctions.addMetricPrefix(
-                                                HelperFunctions.getRoof(
-                                                        volumeHigh) *
-                                                    (1 -
-                                                        (longPressY! -
-                                                                maxHeight *
-                                                                    0.75 -
-                                                                10) /
-                                                            (maxHeight * 0.25 -
-                                                                10))),
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .hoverIndicatorTextColor,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                    width: PRICE_BAR_WIDTH,
-                                    height: 20,
-                                  ),
                                 ],
                               ),
                             )
                           : Container(),
-                      longPressX != null
-                          ? Positioned(
-                              child: Container(
-                                width: widget.candleWidth,
-                                height: maxHeight,
-                                color: Theme.of(context).gold.withOpacity(0.2),
-                              ),
-                              right: (maxWidth - longPressX!) ~/
-                                      widget.candleWidth *
-                                      widget.candleWidth +
-                                  PRICE_BAR_WIDTH,
-                            )
-                          : Container(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 12),
-                        child: currentCandle != null
-                            ? CandleInfoText(candle: currentCandle)
-                            : null,
-                      ),
+                      // longPressX != null
+                      //     ? Positioned(
+                      //         child: Container(
+                      //           width: widget.candleWidth,
+                      //           height: maxHeight,
+                      //           color: Theme.of(context).gold.withOpacity(0.2),
+                      //         ),
+                      //         left: longPressX! ~/
+                      //                 widget.candleWidth *
+                      //                 widget.candleWidth ,
+                      //       )
+                      //     : Container(),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       vertical: 4, horizontal: 12),
+                      //   child: currentCandle != null
+                      //       ? CandleInfoText(candle: currentCandle)
+                      //       : null,
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(right: 50, bottom: 20),
                         child: GestureDetector(

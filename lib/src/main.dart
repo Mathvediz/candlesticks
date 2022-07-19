@@ -23,11 +23,13 @@ class Candlesticks extends StatefulWidget {
   /// list of buttons you what to add on top tool bar
   final List<ToolBarAction> actions;
 
+  final TextStyle textStyle;
+
   Candlesticks({
     Key? key,
     required this.candles,
     this.onLoadMoreCandles,
-    this.actions = const [],
+    this.actions = const [], this.textStyle = const TextStyle(),
   }) : super(key: key);
 
   @override
@@ -52,21 +54,21 @@ class _CandlesticksState extends State<Candlesticks> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ToolBar(
-          onZoomInPressed: () {
-            setState(() {
-              candleWidth += 2;
-              candleWidth = min(candleWidth, 16);
-            });
-          },
-          onZoomOutPressed: () {
-            setState(() {
-              candleWidth -= 2;
-              candleWidth = max(candleWidth, 4);
-            });
-          },
-          children: widget.actions,
-        ),
+        // ToolBar(
+        //   onZoomInPressed: () {
+        //     setState(() {
+        //       candleWidth += 2;
+        //       candleWidth = min(candleWidth, 16);
+        //     });
+        //   },
+        //   onZoomOutPressed: () {
+        //     setState(() {
+        //       candleWidth -= 2;
+        //       candleWidth = max(candleWidth, 4);
+        //     });
+        //   },
+        //   children: widget.actions,
+        // ),
         if (widget.candles.length == 0)
           Expanded(
             child: Center(
@@ -86,6 +88,7 @@ class _CandlesticksState extends State<Candlesticks> {
                     Platform.isWindows ||
                     Platform.isLinux) {
                   return DesktopChart(
+                    textStyle: widget.textStyle,
                     onScaleUpdate: (double scale) {
                       scale = max(0.90, scale);
                       scale = min(1.1, scale);
@@ -125,6 +128,7 @@ class _CandlesticksState extends State<Candlesticks> {
                   );
                 } else {
                   return MobileChart(
+                    textStyle: widget.textStyle,
                     onScaleUpdate: (double scale) {
                       scale = max(0.90, scale);
                       scale = min(1.1, scale);

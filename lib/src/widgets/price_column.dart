@@ -15,6 +15,7 @@ class PriceColumn extends StatefulWidget {
     required this.lastCandle,
     required this.onScale,
     required this.additionalVerticalPadding,
+    required this.textStyle,
   }) : super(key: key);
 
   final double low;
@@ -24,6 +25,7 @@ class PriceColumn extends StatefulWidget {
   final double chartHeight;
   final Candle lastCandle;
   final double additionalVerticalPadding;
+  final TextStyle textStyle;
   final void Function(double) onScale;
 
   @override
@@ -51,14 +53,14 @@ class _PriceColumnState extends State<PriceColumn> {
       child: AbsorbPointer(
         child: Padding(
           padding:
-              EdgeInsets.symmetric(vertical: widget.additionalVerticalPadding),
+              EdgeInsets.symmetric(vertical: widget.additionalVerticalPadding, horizontal: 2),
           child: Stack(
             children: [
               AnimatedPositioned(
                 duration: Duration(milliseconds: 300),
                 top: MAIN_CHART_VERTICAL_PADDING - priceTileHeight / 2,
                 height: widget.chartHeight +
-                    MAIN_CHART_VERTICAL_PADDING +
+                    MAIN_CHART_VERTICAL_PADDING + DATE_BAR_HEIGHT + 100 +
                     priceTileHeight / 2,
                 width: widget.width,
                 child: ListView(
@@ -71,11 +73,6 @@ class _PriceColumnState extends State<PriceColumn> {
                       child: Center(
                         child: Row(
                           children: [
-                            Container(
-                              width: widget.width - PRICE_BAR_WIDTH,
-                              height: 0.05,
-                              color: Theme.of(context).grayColor,
-                            ),
                             Expanded(
                               child: Text(
                                 "${HelperFunctions.priceToString(widget.high - widget.priceScale * i)}",
@@ -86,6 +83,11 @@ class _PriceColumnState extends State<PriceColumn> {
                                 ),
                               ),
                             ),
+                            Container(
+                              width: widget.width - PRICE_BAR_WIDTH,
+                              height: 0.05,
+                              color: Theme.of(context).grayColor,
+                            ),
                           ],
                         ),
                       ),
@@ -95,7 +97,7 @@ class _PriceColumnState extends State<PriceColumn> {
               ),
               AnimatedPositioned(
                 duration: Duration(milliseconds: 300),
-                right: 0,
+                left: 0,
                 top: calcutePriceIndicatorTopPadding(
                   widget.chartHeight,
                   widget.low,
@@ -104,9 +106,12 @@ class _PriceColumnState extends State<PriceColumn> {
                 child: Row(
                   children: [
                     Container(
-                      color: widget.lastCandle.isBull
-                          ? Theme.of(context).primaryGreen
-                          : Theme.of(context).primaryRed,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: widget.lastCandle.isBull
+                            ? Color(0xFF0CD190)
+                            : Color(0xFFFF6262),
+                      ),
                       child: Center(
                         child: Text(
                           HelperFunctions.priceToString(

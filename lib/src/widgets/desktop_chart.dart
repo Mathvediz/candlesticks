@@ -40,6 +40,7 @@ class DesktopChart extends StatefulWidget {
   final void Function() onPanEnd;
 
   final Function() onReachEnd;
+  final TextStyle textStyle;
 
   DesktopChart({
     required this.onScaleUpdate,
@@ -49,7 +50,7 @@ class DesktopChart extends StatefulWidget {
     required this.index,
     required this.onPanDown,
     required this.onPanEnd,
-    required this.onReachEnd,
+    required this.onReachEnd, required this.textStyle,
   });
 
   @override
@@ -167,6 +168,7 @@ class _DesktopChartState extends State<DesktopChart> {
                             child: Stack(
                               children: [
                                 PriceColumn(
+                                  textStyle: widget.textStyle,
                                   low: candlesLowPrice,
                                   high: candlesHighPrice,
                                   priceScale: priceScale,
